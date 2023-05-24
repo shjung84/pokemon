@@ -44,12 +44,19 @@ const router = new VueRouter({
       },
     },
   ],
+
   scrollBehavior(to, from, savedPosition) {
-    console.log(savedPosition);
     if (savedPosition) {
-      return savedPosition;
+      console.log(`11111111111 getPokemonPageList`);
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(savedPosition);
+          resolve(savedPosition);
+        }, 300);
+        console.log(`reject : ${reject}`);
+      });
     } else {
-      // console.log()
+      console.log(`22222222222 getPokemonPageList`);
       return { x: 0, y: 0 };
     }
   },

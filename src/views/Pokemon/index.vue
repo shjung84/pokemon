@@ -19,7 +19,9 @@
 
 <template lang="pug">
 .wrap
-  .test-area #[span length :: ] {{ list.length }}
+  .test-area
+    p total :: {{ this.form.totalCount }}
+    p length :: {{ list.length }}
   //- ul.list--gallery(@scroll="checkSize")
   ul.list--gallery
     li.item__cell(v-for="item of list")
@@ -70,7 +72,9 @@ export default {
     fetchList() {
       this.spinner = true;
       getPokemonPageList(this.form).then(res => {
+        console.log(`getPokemonPageList`);
         const { count, results } = res;
+        console.log(res);
         this.form.totalCount = count;
         this.list = this._.concat(
           this.list,
@@ -85,7 +89,6 @@ export default {
 
         if (this.form.first) {
           // 스크롤이동
-
           this.form.first = false;
         }
       });
