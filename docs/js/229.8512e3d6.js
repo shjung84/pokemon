@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkdashboard_vue2"]=self["webpackChunkdashboard_vue2"]||[]).push([[229],{6229:function(t,e,n){n.r(e),n.d(e,{default:function(){return c}});var u=function(){var t=this,e=t._self._c;return e("h2",[t._v(t._s(t.title))])},r=[],a={name:"Logout",props:{title:{type:String,default:""}},components:{},data(){return{}}},l=a,s=n(1001),o=(0,s.Z)(l,u,r,!1,null,null,null),c=o.exports}}]);
+//# sourceMappingURL=229.8512e3d6.js.map
