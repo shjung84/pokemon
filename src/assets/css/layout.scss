@@ -74,7 +74,6 @@ header {
   }
   ul {
     display: none;
-    border: 1px solid #000;
   }
 }
 
@@ -82,7 +81,6 @@ header {
 #container {
   position: relative;
   z-index: 1;
-  border: 1px solid #000;
   .container-inner {
     padding: 30px;
   }

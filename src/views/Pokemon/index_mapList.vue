@@ -1,30 +1,14 @@
 <style lang="scss" scoped>
-.category {
-  margin-bottom: 30px;
-  ul {
-    text-align: center;
-    li {
-      display: inline-block;
-      margin: 3px 5px;
-      a {
-        display: block;
-        padding: 2px 10px;
-        background-color: #f60;
-        color: $color-bg;
-        @include border-radius(4px);
-      }
-    }
-  }
-}
 .test-area {
   position: fixed;
   top: 50px;
-  right: 0;
+  left: 0;
   z-index: 50;
-  padding: 3px;
+  padding: 20px;
   border: 1px solid #000;
   background-color: #fff;
   font-weight: 700;
+  font-size: 20px;
 }
 /* .list--gallery {
   height: calc(100vh - 50px);
@@ -39,18 +23,12 @@
     p total :: {{ this.form.totalCount }}
     p length :: {{ list.length }}
   //- ul.list--gallery(@scroll="checkSize")
-  .category
-    ul
-      li #[a(href="javascript:;") 1세대]
-      li #[a(href="javascript:;") 2세대]
-      li #[a(href="javascript:;") 3세대]
-      li #[a(href="javascript:;") 4세대]
   ul.list--gallery
     //- li.item__cell(v-for="item of list")
     li.item__cell(v-for="item of list")
       a(href="javascript:;" class="item__cell--thumb" @click="pokeDetail(item.id)")
         img(:src="imageUrl + item.id + '.png'" width="96" height="96" alt="")
-        em(class="item__cell--badge") #[i #]{{ item.id }}
+        em(class="item__cell--badge") {{ item.id }}
         span {{ item.name }}
   .btn-area.center
     el-button(name="button" @click="next") MORE
@@ -100,6 +78,7 @@ export default {
         console.log(res);
 
         this.form.totalCount = count;
+        this.list = results;
         console.log(results);
 
         this.list = this._.concat(
@@ -120,8 +99,6 @@ export default {
         }
       });
     },
-
-    fetchData() {},
 
     next() {
       this.form.page++;
