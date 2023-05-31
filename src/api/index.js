@@ -20,17 +20,14 @@ export function getPokemonPageList(params) {
 }
 
 export function getGenerationList() {
-  return request({
-    url: "generation",
-    method: "get",
-    params: {},
-  });
-}
+  // const { page } = params;
+  // const generation = page;
 
-export function getPokemonList() {
   return request({
-    url: "pokemon-species",
+    url: "generation/",
     method: "get",
-    params: {},
+    params: {
+      // generation
+    },
   });
 }

@@ -14,6 +14,7 @@ html {
   background-color: #cc0;
 }
 body {
+  height: 100%;
   min: {
     width: 420px;
     height: 100%;
@@ -294,10 +295,12 @@ select {
 }
 
 .list--gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 20px;
-  width: 100%;
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+    width: 100%;
+  }
   .item {
     &__cell {
       position: relative;

@@ -1,20 +1,35 @@
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.app-wrap {
+  position: relative;
+  min-height: 100%;
+  border: 1px solid #000;
+}
+</style>
 
 <template lang="pug">
-#container
-  comp-gnb()
+.app-wrap
+  gnb(:title="title")
+  lnb
   app-main
 </template>
 
 <script>
-import CompGnb from "./components/CompGnb";
+import Gnb from "./components/Gnb";
+import Lnb from "./components/Lnb";
 import AppMain from "./components/AppMain";
 
 export default {
+  props: {},
   components: {
-    CompGnb,
+    Gnb,
+    Lnb,
     AppMain,
   },
-  computed: {},
+  computed: {
+    title() {
+      console.log("app-wrap");
+      return this.$route.meta.title;
+    },
+  },
 };
 </script>

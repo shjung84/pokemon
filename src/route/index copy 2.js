@@ -1,11 +1,16 @@
 // import { createWebHistory, createRouter } from "vue-router";
 
 import Vue from "vue";
-import VueRouter from "vue-router";
-Vue.use(VueRouter);
+import Router from "vue-router";
+import _ from "lodash";
+
+import route from "@/route";
+import store from "@/store";
+Vue.use(Router);
+
+import PageNotFound from "@/views/PageNotFound.vue";
 
 import Layout from "@/layout/page";
-import PageNotFound from "@/views/PageNotFound.vue";
 
 // 라우터 인스턴스 생성
 const router = new VueRouter({
@@ -20,7 +25,7 @@ const router = new VueRouter({
           path: "/",
           component: () => import("@/views/Pokemon/index"),
           meta: {
-            title: "PokeList",
+            title: "Poke List",
           },
         },
         {
@@ -28,6 +33,20 @@ const router = new VueRouter({
           component: () => import("@/views/Pokemon/detail"),
           meta: {
             title: "Pokemon Detail",
+          },
+        },
+        {
+          path: "/Generation",
+          component: () => import("@/views/Generation/index"),
+          meta: {
+            title: "Poke Generation List",
+          },
+        },
+        {
+          path: "/Generation/detail/:id",
+          component: () => import("@/views/Generation/detail"),
+          meta: {
+            title: "Poke Generation Detail",
           },
         },
       ],
@@ -47,7 +66,7 @@ const router = new VueRouter({
 
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      console.log(`11111111111 getPokemonPageList`);
+      // console.log(`11111111111 getPokemonPageList`);
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           console.log(savedPosition);
@@ -56,7 +75,7 @@ const router = new VueRouter({
         console.log(`reject : ${reject}`);
       });
     } else {
-      console.log(`22222222222 getPokemonPageList`);
+      // console.log(`22222222222 getPokemonPageList`);
       return { x: 0, y: 0 };
     }
   },

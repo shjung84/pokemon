@@ -39,6 +39,7 @@
 <style lang="scss"></style>
 <template lang="pug">
 .wrap
+  h2 {{ title }}
   .test-area
     span [ total :: {{ this.form.totalCount }} ]
     span &nbsp;,&nbsp;
@@ -68,13 +69,18 @@
 import { getGenerationList } from "@/api/index.js";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import pokemonDetail from "./pokemonDetail";
 
 export default {
   name: "MyPokemonList",
+  props: {
+    title: {
+      type: String,
+      default: "",
+    },
+  },
+
   components: {
     FontAwesomeIcon,
-    pokemonDetail,
   },
 
   watch: {

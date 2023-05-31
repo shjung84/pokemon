@@ -14,8 +14,8 @@ export default new Vuex.Store({
     SET_POKEMON_LIST(state, payload) {
       state.pageParams = state.pageParams.concat(payload.pageParams);
       state.pages = state.pages.concat(payload.pages);
-      console.log(` :::::::::::::::::::: store :::::::::::::::::: state.pages`);
-      console.log(state);
+      // console.log(` :::::::::::::::::::: store :::::::::::::::::: state.pages`);
+      // console.log(state);
     },
   },
   actions: {
