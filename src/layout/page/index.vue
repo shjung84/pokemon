@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     title() {
-      console.log("app-wrap");
+      // console.log("app-wrap");
       return this.$route.meta.title;
     },
   },

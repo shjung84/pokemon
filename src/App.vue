@@ -22,7 +22,7 @@ export default {
     return {};
   },
   mounted() {
-    console.log(`App : mounted`);
+    // console.log(`App : mounted`);
   },
 };
 </script>

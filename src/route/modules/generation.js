@@ -1,6 +1,6 @@
 import Layout from "@/layout/page";
 
-const GenerationRouter = {
+const generationRouter = {
   path: "/Generation",
   component: Layout,
   children: [
@@ -17,4 +17,4 @@ const GenerationRouter = {
     },
   ],
 };
-export default GenerationRouter;
+export default generationRouter;

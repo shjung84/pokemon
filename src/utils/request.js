@@ -4,6 +4,7 @@ import { toFormData } from "@ankit_brahmbhatt/toformdata";
 
 // create an axios instance
 const service = axios.create({
+  // baseURL: process.env.VUE_APP_BASE_API,
   baseURL: "https://pokeapi.co/api/v2/",
   timeout: 300000,
   //timeout: 180000,

@@ -5,7 +5,7 @@ import Router from "vue-router";
 import _ from "lodash";
 
 // import route from "@/route";
-// import store from "@/store";
+import store from "@/store";
 
 import PageNotFound from "@/views/PageNotFound.vue";
 
@@ -18,7 +18,7 @@ export const constantRoutes = _.concat(
   routers,
   {
     path: "/",
-    redirect: "/Generation",
+    redirect: "/MainPage",
   },
   { path: "*", component: PageNotFound }
 );
@@ -34,7 +34,20 @@ const createRouter = () =>
     },
     routes: constantRoutes,
   });
+
 const router = createRouter();
+
+// router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  console.log(to, from, next);
+
+  if (store.state.common.menu === null) {
+    await store.dispatch("common/setMenu", true);
+    console.log(`store.state.common.menu :: ${store.state.common.menu}`);
+  }
+
+  next();
+});
 
 // 라우터 인스턴스 생성
 // const router = new Router({
@@ -105,9 +118,9 @@ const router = createRouter();
 //   },
 // });
 
-// 인스턴스에 라우터 인스턴스를 등록
-new Vue({
-  router: router,
-});
+// // 인스턴스에 라우터 인스턴스를 등록
+// new Vue({
+//   router: router,
+// });
 
 export default router;

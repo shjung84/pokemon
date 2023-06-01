@@ -1,5 +1,6 @@
 <style lang="scss" scoped>
 .lnb-container {
+  overflow: hidden;
   position: absolute;
   top: 50px;
   bottom: 0;
@@ -59,30 +60,39 @@
 .lnb-container
   #lnb
     ul
-      li.is-active
-        a(href="/Generation") 세대별
-        ul
-          li
-            a(href="javascript:;") 1세대
-          li
-            a(href="javascript:;") 1세대
-      li
-        a(href="/Generation") 세대별
-        ul
-          li
-            a(href="javascript:;") 1세대
-          li
-            a(href="javascript:;") 1세대
+      li(v-for="item of menuList" :class="{'is-active' : item.active}")
+        router-link(:to="item.to") {{ item.name }}
+      li ======================================
+      //- li.is-active
+      //-   router-link(to="/Generation") #[em 세대별]
+
+      //-   ul
+      //-     li
+      //-       router-link(to="/Generation/1세대") #[em 1세대]
+      //-     li
+      //-       router-link(to="/Generation/2세대") #[em 2세대]
+      //- li
+      //-   a(href="/Pokemon") 타입별
+      //-   ul
+      //-     li
+      //-       a(href="javascript:;") 타입
+      //-     li
+      //-       a(href="javascript:;") 타입
 
 
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  name: "MyDevice",
+  name: "Lnb",
   components: {},
+  watch: {},
   data() {
     return {};
+  },
+  computed: {
+    ...mapGetters(["menuList"]),
   },
   methods: {},
 };
