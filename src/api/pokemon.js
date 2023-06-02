@@ -31,3 +31,16 @@ export function getGenerationList() {
     },
   });
 }
+
+export function getPokemonList() {
+  // const { page } = params;
+  // const generation = page;
+
+  return request({
+    url: "generation/",
+    method: "get",
+    params: {
+      // generation
+    },
+  });
+}

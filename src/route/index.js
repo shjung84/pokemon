@@ -43,7 +43,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (store.state.common.menu === null) {
     await store.dispatch("common/setMenu", true);
-    console.log(`store.state.common.menu :: ${store.state.common.menu}`);
+    // console.log(`1 store.state.common.menu :: ${store.state.common.menu}`);
   }
 
   next();

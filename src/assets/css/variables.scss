@@ -4,7 +4,7 @@ $tablet: 640px;
 $desktop: 1024px;
 
 /* Layout */
-$lnb-width: 150px;
+$lnb-width: 180px;
 
 /*넓이, 높이 자동 계산함수*/
 @mixin square($size) {

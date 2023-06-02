@@ -40,11 +40,20 @@
 <template lang="pug">
 .wrap
   h2 {{ title }}
+  .list--gallery
+    ul
+      li.item__cell(v-for="item of pokemonList")
+        a(href="javascript:;" class="item__cell--thumb" @click="pokeDetail(item.id)")
+          img(:src="imageUrl + item.id + '.png'" width="96" height="96" alt="")
+          em(class="item__cell--badge") #[i #]{{ item.id }}
+          span {{ item.name }}
 
 
 </template>
 
 <script>
+import { getPokemonList } from "@/api/pokemon.js";
+
 export default {
   name: "MyPokemonList",
   props: {
@@ -54,12 +63,32 @@ export default {
     },
   },
   components: {},
-
-  data() {
-    return {};
+  watch: {
+    "$route.query"(newVal, oldVal) {
+      if (newVal.page !== oldVal.page) {
+        console.log(`newVal.page :: ${newVal.page}, oldVal.page :: ${oldVal.page}`);
+        // this.fetchList();
+      }
+    },
   },
-  methods: {},
-  created() {},
-  mounted() {},
+  data() {
+    return {
+      pokemonList: {},
+      generationId: null,
+    };
+  },
+  mounted() {
+    this.generationId = this.$route.params.id;
+    this.fetchList();
+  },
+  methods: {
+    fetchList() {
+      getPokemonList().then(res => {
+        console.log(res);
+        const { results } = res;
+        console.log(results);
+      });
+    },
+  },
 };
 </script>

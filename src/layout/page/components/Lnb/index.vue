@@ -42,6 +42,9 @@
           display: block;
         }
       }
+      .router-link-active {
+        font-weight: bold;
+      }
     }
   }
   > ul {
@@ -60,26 +63,14 @@
 .lnb-container
   #lnb
     ul
-      li(v-for="item of menuList" :class="{'is-active' : item.active}")
-        router-link(:to="item.to") {{ item.name }}
-      li ======================================
-      //- li.is-active
-      //-   router-link(to="/Generation") #[em 세대별]
-
-      //-   ul
-      //-     li
-      //-       router-link(to="/Generation/1세대") #[em 1세대]
-      //-     li
-      //-       router-link(to="/Generation/2세대") #[em 2세대]
-      //- li
-      //-   a(href="/Pokemon") 타입별
-      //-   ul
-      //-     li
-      //-       a(href="javascript:;") 타입
-      //-     li
-      //-       a(href="javascript:;") 타입
-
-
+      li(class="is-active")
+        a(href="javascript:;") #[em 세대별]
+        ul
+          li(v-for="item of menuList" :class="{'is-active' : item.active}")
+            router-link(:to="item.id") {{ item.id }}, {{ item.name }}
+      li #[a(href="/Pokemon") 타입별]
+        ul
+          li #[a(href="javascript:;") 타입]
 </template>
 
 <script>
@@ -94,6 +85,10 @@ export default {
   computed: {
     ...mapGetters(["menuList"]),
   },
-  methods: {},
+  methods: {
+    rowClick(row) {
+      this.$router.push({ name: "Generation", params: { id: row.id } });
+    },
+  },
 };
 </script>
