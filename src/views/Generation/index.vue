@@ -39,21 +39,17 @@
 <style lang="scss"></style>
 <template lang="pug">
 .wrap
-  h2 {{ title }}
+  h2.title #[mdicon(name="note-text-outline")] #[span {{ names }}]
   .list--gallery
     ul
-      li.item__cell(v-for="item of pokemonList")
+      li.item__cell(v-for="item of list")
         a(href="javascript:;" class="item__cell--thumb" @click="pokeDetail(item.id)")
           img(:src="imageUrl + item.id + '.png'" width="96" height="96" alt="")
           em(class="item__cell--badge") #[i #]{{ item.id }}
           span {{ item.name }}
-
-
 </template>
 
 <script>
-import { getPokemonList } from "@/api/pokemon.js";
-
 export default {
   name: "MyPokemonList",
   props: {
@@ -61,33 +57,61 @@ export default {
       type: String,
       default: "",
     },
+    url: {
+      type: String,
+      default: "url",
+    },
   },
-  components: {},
+  computed: {},
   watch: {
-    "$route.query"(newVal, oldVal) {
-      if (newVal.page !== oldVal.page) {
-        console.log(`newVal.page :: ${newVal.page}, oldVal.page :: ${oldVal.page}`);
-        // this.fetchList();
+    $route(newVal, oldVal) {
+      if (newVal.path !== oldVal.path) {
+        this.form.page = this.$route.params.page;
+        this.fetchList();
       }
     },
   },
   data() {
     return {
-      pokemonList: {},
-      generationId: null,
+      imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
+      apiUrl: "https://pokeapi.co/api/v2/generation/",
+      currentUrl: "",
+      generationList: {},
+      list: {},
+      names: "",
+      form: {
+        page: null,
+      },
     };
   },
   mounted() {
-    this.generationId = this.$route.params.id;
+    this.form.page = this.$route.params.page;
     this.fetchList();
   },
   methods: {
     fetchList() {
-      getPokemonList().then(res => {
-        console.log(res);
-        const { results } = res;
-        console.log(results);
-      });
+      this.currentUrl = this.apiUrl + this.$route.params.page;
+      let req = new Request(this.currentUrl);
+      fetch(req)
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          this.names = this._.find(data.names, { language: { name: "ko" } }).name;
+          this.list = data.pokemon_species.map(item => {
+            item.id = item.url
+              .split("/")
+              .filter(item => item)
+              .pop();
+            return item;
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    pokeDetail(id) {
+      this.$router.push(`detail/${id}`).catch(() => {});
     },
   },
 };

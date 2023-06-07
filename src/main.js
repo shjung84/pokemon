@@ -1,6 +1,6 @@
 import "@/assets/css/normalize.css";
+import "@/assets/css/common.scss";
 import "@/assets/css/style.scss";
-import "@/assets/css/layout.scss";
 import "@/assets/css/vue2-scrollbar.scss";
 import "@/assets/css/tailwindcss.css";
 import "element-ui/lib/theme-chalk/index.css";

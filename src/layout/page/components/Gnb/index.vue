@@ -2,7 +2,7 @@
 .gnb-container {
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 3;
   min-width: 320px;
   height: 50px;
   background-color: #fff;

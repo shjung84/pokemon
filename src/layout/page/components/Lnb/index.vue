@@ -67,7 +67,7 @@
         a(href="javascript:;") #[em 세대별]
         ul
           li(v-for="item of menuList" :class="{'is-active' : item.active}")
-            router-link(:to="item.id") {{ item.id }}, {{ item.name }}
+            router-link(:to="item.path") {{ item.name }}
       li #[a(href="/Pokemon") 타입별]
         ul
           li #[a(href="javascript:;") 타입]
@@ -85,10 +85,6 @@ export default {
   computed: {
     ...mapGetters(["menuList"]),
   },
-  methods: {
-    rowClick(row) {
-      this.$router.push({ name: "Generation", params: { id: row.id } });
-    },
-  },
+  methods: {},
 };
 </script>

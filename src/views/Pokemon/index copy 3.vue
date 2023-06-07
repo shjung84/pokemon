@@ -80,9 +80,7 @@ export default {
         })
         .then(data => {
           console.log(data);
-          // this.pokemons = data.results;
           this.nextUrl = data.next;
-
           data.results.forEach(pokemon => {
             pokemon.id = pokemon.url
               .split("/")

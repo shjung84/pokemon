@@ -1,20 +1,14 @@
 <style lang="scss" scoped>
 .test-area {
   position: fixed;
-  top: 50px;
+  bottom: 0;
   left: 0;
   z-index: 50;
   padding: 20px;
-  border: 1px solid #000;
   background-color: #fff;
   font-weight: 700;
   font-size: 20px;
 }
-/* .list--gallery {
-  height: calc(100vh - 50px);
-  overflow-y: auto;
-  border: 5px solid #000;
-} */
 </style>
 
 <template lang="pug">
@@ -23,28 +17,27 @@
     p total :: {{ this.form.totalCount }}
     p length :: {{ list.length }}
   //- ul.list--gallery(@scroll="checkSize")
-  ul.list--gallery
-    //- li.item__cell(v-for="item of list")
-    li.item__cell(v-for="item of list")
-      a(href="javascript:;" class="item__cell--thumb" @click="pokeDetail(item.id)")
-        img(:src="imageUrl + item.id + '.png'" width="96" height="96" alt="")
-        em(class="item__cell--badge") {{ item.id }}
-        span {{ item.name }}
+  .list--gallery
+    ul
+      //- li.item__cell(v-for="item of list")
+      li.item__cell(v-for="item of list")
+        a(href="javascript:;" class="item__cell--thumb" @click="pokeDetail(item.id)")
+          img(:src="imageUrl + item.id + '.png'" width="96" height="96" alt="")
+          em(class="item__cell--badge") {{ item.id }}
+          span {{ item.name }}
   .btn-area.center
     el-button(name="button" @click="next") MORE
 
 </template>
 
 <script>
-import { getPokemonPageList } from "@/api/index.js";
+import { getPokemonPageList } from "@/api/pokemon.js";
 
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import pokemonDetail from "./pokemonDetail";
 
 export default {
   name: "MyPokemonList",
   components: {
-    FontAwesomeIcon,
     pokemonDetail,
   },
 
@@ -52,6 +45,9 @@ export default {
     "$route.query"(newVal, oldVal) {
       if (newVal.page !== oldVal.page) {
         this.fetchList();
+        console.log(`1`);
+      } else {
+        console.log(`2`);
       }
     },
   },
@@ -59,7 +55,6 @@ export default {
   data() {
     return {
       imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
-      spinner: false,
       list: [],
       form: {
         page: 1,
@@ -71,19 +66,14 @@ export default {
   },
   methods: {
     fetchList() {
-      this.spinner = true;
       getPokemonPageList(this.form).then(res => {
         console.log(`getPokemonPageList`);
         const { count, results } = res;
-        console.log(res);
 
         this.form.totalCount = count;
-        this.list = results;
-        console.log(results);
 
         this.list = this._.concat(
           this.list,
-
           results.map(item => {
             item.id = item.url
               .split("/")
@@ -93,10 +83,13 @@ export default {
           })
         );
 
+        console.log(this.list);
+
         if (this.form.first) {
           // 스크롤이동
           this.form.first = false;
         }
+        console.log(this.form.first);
       });
     },
 
@@ -113,6 +106,7 @@ export default {
     if (!this._.isEmpty(this.$route.query)) {
       this.form.page = this.$route.query.page;
     }
+    console.log(`this.form.page :: ${this.form.page}`);
     this.fetchList();
   },
 };

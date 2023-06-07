@@ -1,12 +1,14 @@
 import Layout from "@/layout/page";
 
 const homeRouter = {
-  path: "/",
+  path: "/MainPage",
   component: Layout,
   children: [
     {
-      path: "/MainPage",
-      component: () => import("@/views/home"),
+      path: "/",
+      // component: () => import("@/views/home"),
+      component: () => import("@/views/Pokemon/index_mapList"),
+
       meta: { title: "Home" },
     },
   ],

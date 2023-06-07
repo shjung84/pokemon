@@ -2,7 +2,13 @@
 .app-wrap {
   position: relative;
   min-height: 100%;
-  border: 1px solid #000;
+}
+.app-container {
+  overflow-y: auto;
+  height: calc(100vh - 50px);
+  padding: {
+    left: $lnb-width;
+  }
 }
 </style>
 
@@ -10,7 +16,8 @@
 .app-wrap
   gnb(:title="title")
   lnb
-  app-main
+  .app-container
+    app-main
 </template>
 
 <script>

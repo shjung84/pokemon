@@ -19,10 +19,17 @@ const actions = {
           const menu = results.map(item => {
             return {
               name: item.name,
+              url: item.url,
               id: item.url
                 .split("/")
                 .filter(item => item)
                 .pop(),
+              path:
+                "/Generation/" +
+                item.url
+                  .split("/")
+                  .filter(item => item)
+                  .pop(),
             };
           });
           commit("SET_MENU", menu);

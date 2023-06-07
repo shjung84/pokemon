@@ -1,21 +1,14 @@
 <style lang="scss" scoped>
 /* Main */
-.app-container {
-  position: relative;
-  z-index: 1;
-  padding-left: $lnb-width;
-  .app-main {
-    padding: 30px;
-    border: 1px solid #000;
-  }
+.app-main {
+  padding: 30px;
 }
 </style>
 <style lang="scss"></style>
 
 <template lang="pug">
-.app-container
-  .app-main
-    router-view(:title="title")
+.app-main
+  router-view(:title="title")
 </template>
 
 <script>
